@@ -49,6 +49,7 @@ public class Player : MonoBehaviour {
 		this.gameObject.rigidbody2D.AddForce(movement);
 
 		ClampVelocity();
+		CameraFollow();
 	}
 
 	public void ClampVelocity() {
@@ -62,7 +63,12 @@ public class Player : MonoBehaviour {
 	}
 
 	public void CameraFollow() {
-
+		if(this.transform.position.x > Camera.main.transform.position.x) {
+			Vector3 camPos = this.transform.position;
+			camPos.y = Camera.main.transform.position.y;
+			camPos.z = Camera.main.transform.position.z;
+			Camera.main.transform.position = camPos;
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
